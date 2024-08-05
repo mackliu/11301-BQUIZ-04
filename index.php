@@ -38,6 +38,7 @@
                         </span>
                 </div>
                 <div id="right">
+                        <div></div>
                 </div>
                 <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
                         頁尾版權 : </div>
