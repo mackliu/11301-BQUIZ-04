@@ -4,7 +4,8 @@ if (isset($_POST['bottom'])) {
 }
 
 ?>
-
+<!-- h2.ct+form:post>table.all>tr>td.tt.ct+td.pp -->
+ 
 <h2 class="ct">編輯頁尾版權區</h2>
 <form action="?do=bot" method="post">
     <table class="all">
