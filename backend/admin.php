@@ -14,9 +14,20 @@
     foreach ($rows as $row) {
     ?>
         <tr class="pp ct">
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><?= $row['acc']; ?></td>
+            <td><?= str_repeat("*", mb_strlen($row['pw'])); ?></td>
+            <td>
+                <?php
+                if ($row['acc'] == 'admin') {
+                    echo "此帳號為最高權限";
+                } else {
+                ?>
+                    <button onclick="location.href='?do=edit_admin&id=<?= $row['id']; ?>'">修改</button>
+                    <button onclick="del('Admin',<?= $row['id']; ?>)">刪除</button>
+                <?php
+                }
+                ?>
+            </td>
         </tr>
     <?php
     }
