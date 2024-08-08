@@ -16,7 +16,38 @@
     </tr>
     <tr>
         <td class="tt ct">驗證碼</td>
-        <td class="pp"><input type="text" name="ans" id="ans"></td>
+        <td class="pp">
+            <?php
+            $a = rand(10, 99);
+            $b = rand(10, 99);
+            $_SESSION['ans'] = $a + $b;
+            echo $a . " + " . $b . " = ";
+            ?>
+            <input type="text" name="ans" id="ans">
+        </td>
     </tr>
 </table>
-<div class="ct"><button>確認</button></div>
+<div class="ct"><button onclick="login()">確認</button></div>
+<script>
+    function login() {
+        $.get("./api/chk_ans.php", {
+            ans: $("#ans").val()
+        }, (chk) => {
+            if (parseInt(chk)) {
+                $.get("./api/chk_pw.php", {
+                    acc: $("#acc").val(),
+                    pw: $("#pw").val()
+                }, (chk) => {
+
+                    if (parseInt(chk)) {
+                        location.href = "index.php";
+                    } else {
+                        alert("帳號或密碼錯誤");
+                    }
+                })
+            } else {
+                alert("對不起，你輸入的驗證碼有誤，請您重新輸入");
+            }
+        })
+    }
+</script>
