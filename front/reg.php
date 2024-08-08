@@ -39,11 +39,33 @@
         $.post("api/chk_acc.php", {
             acc: $("#acc").val()
         }, (chk) => {
-            console.log(chk, $("#acc").val())
-            if (parseInt(chk) == 1) {
+            if (parseInt(chk) == 1 || $("#acc").val() == "admin") {
                 alert("帳號重複");
             } else {
                 alert("此帳號可使用");
+            }
+        })
+    }
+
+    function reg() {
+        let info = {
+            name: $("#name").val(),
+            acc: $("#acc").val(),
+            pw: $("#pw").val(),
+            tel: $("#tel").val(),
+            addr: $("#addr").val(),
+            email: $("#email").val(),
+        }
+        $.post("api/chk_acc.php", {
+            acc: info.acc
+        }, (chk) => {
+
+            if (parseInt(chk) == 1 || info.acc == "admin") {
+                alert("帳號重複");
+            } else {
+                $.post("api/add_user.php", info, () => {
+                    location.href = "?do=login";
+                })
             }
         })
     }
