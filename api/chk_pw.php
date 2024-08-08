@@ -3,4 +3,9 @@
 $table = $_GET['table'];
 unset($_GET['table']);
 
-echo $$table->count($_GET);
+if($$table->count($_GET)){
+    echo 1;
+    $_SESSION[$table]=$_GET['acc'];
+}else{
+    echo 0;
+}
