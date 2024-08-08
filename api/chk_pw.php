@@ -1,3 +1,6 @@
 <?php include_once "base.php";
 
-echo $chk = $Mem->count($_GET);
+$table = $_GET['table'];
+unset($_GET['table']);
+
+echo $$table->count($_GET);
