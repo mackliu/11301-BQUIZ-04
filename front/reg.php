@@ -9,7 +9,7 @@
         <td class="tt ct">帳號</td>
         <td class="pp">
             <input type="text" name="acc" id="acc">
-            <button>檢測帳號</button>
+            <button onclick="chk()">檢測帳號</button>
         </td>
     </tr>
     <tr>
@@ -30,6 +30,21 @@
     </tr>
 </table>
 <div class="ct">
-    <button>註冊</button>
+    <button onclick='reg()'>註冊</button>
     <button>重置</button>
 </div>
+
+<script>
+    function chk() {
+        $.post("api/chk_acc.php", {
+            acc: $("#acc").val()
+        }, (chk) => {
+            console.log(chk, $("#acc").val())
+            if (parseInt(chk) == 1) {
+                alert("帳號重複");
+            } else {
+                alert("此帳號可使用");
+            }
+        })
+    }
+</script>
