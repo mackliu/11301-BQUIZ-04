@@ -64,12 +64,12 @@
             <td><?= $row['no']; ?></td>
             <td><?= $row['name']; ?></td>
             <td><?= $row['stock']; ?></td>
-            <td><?= ($row['sh'] == 1) ? "販售中" : "已下架"; ?></td>
+            <td id="g<?= $row['id']; ?>"><?= ($row['sh'] == 1) ? "販售中" : "已下架"; ?></td>
             <td>
-                <button>修改</button>
-                <button>刪除</button>
-                <button>上架</button>
-                <button>下架</button>
+                <button onclick="location.href='?do=edit_goods&id=<?= $row['id']; ?>'">修改</button>
+                <button onclick="del('Goods',<?= $row['id']; ?>)">刪除</button>
+                <button onclick="sw('up',<?= $row['id']; ?>)">上架</button>
+                <button onclick="sw('down',<?= $row['id']; ?>)">下架</button>
             </td>
         </tr>
     <?php
@@ -81,4 +81,21 @@
 
 <script>
     getTypes();
+
+    function sw(action, id) {
+        $.post('api/sw.php', {
+            id,
+            action
+        }, () => {
+            //location.reload();
+            switch (action) {
+                case 'up':
+                    $(`#g${id}`).html('販售中');
+                    break;
+                case 'down':
+                    $(`#g${id}`).html('已下架');
+                    break;
+            }
+        })
+    }
 </script>
