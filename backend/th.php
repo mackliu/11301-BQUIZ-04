@@ -9,20 +9,37 @@
 </div>
 
 <table class="all">
-    <tr class="tt">
-        <td>a</td>
-        <td class='ct'>
-            <button>修改</button>
-            <button onclick="del('Type',id)">刪除</button>
-        </td>
-    </tr>
-    <tr class="pp ct">
-        <td>c</td>
-        <td>
-            <button>修改</button>
-            <button onclick="del('Type',id)">刪除</button>
-        </td>
-    </tr>
+    <?php
+    $bigs = $Type->all(['big_id' => 0]);
+    foreach ($bigs as $big) {
+    ?>
+        <tr class="tt">
+            <td><?= $big['name']; ?></td>
+            <td class='ct'>
+                <button data-id="<?= $big['id']; ?>">修改</button>
+                <button onclick="del('Type',<?= $big['id']; ?>)">刪除</button>
+            </td>
+        </tr>
+        <?php
+        if ($Type->count(['big_id' => $big['id']]) > 0) {
+            $mids = $Type->all(['big_id' => $big['id']]);
+            foreach ($mids as $mid) {
+        ?>
+                <tr class="pp ct">
+                    <td><?= $mid['name']; ?></td>
+                    <td>
+                        <button data-id="<?= $mid['id']; ?>">修改</button>
+                        <button onclick="del('Type',<?= $mid['id']; ?>)">刪除</button>
+                    </td>
+                </tr>
+        <?php
+            }
+        }
+        ?>
+    <?php
+    }
+    ?>
+
 </table>
 
 
