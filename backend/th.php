@@ -16,7 +16,7 @@
         <tr class="tt">
             <td><?= $big['name']; ?></td>
             <td class='ct'>
-                <button data-id="<?= $big['id']; ?>">修改</button>
+                <button onclick="editType(<?= $big['id']; ?>,this)">修改</button>
                 <button onclick="del('Type',<?= $big['id']; ?>)">刪除</button>
             </td>
         </tr>
@@ -28,7 +28,7 @@
                 <tr class="pp ct">
                     <td><?= $mid['name']; ?></td>
                     <td>
-                        <button data-id="<?= $mid['id']; ?>">修改</button>
+                        <button onclick="editType(<?= $mid['id']; ?>,this)">修改</button>
                         <button onclick="del('Type',<?= $mid['id']; ?>)">刪除</button>
                     </td>
                 </tr>
@@ -51,6 +51,21 @@
 
 <script>
     getTypes();
+
+    function editType(id, dom) {
+        let name = $(dom).parent().prev().text();
+        let result = prompt("請輸入要修改的分類名稱", name);
+        if (result != null) {
+            $.post('api/edit_type.php', {
+                id,
+                name: result
+            }, () => {
+                //location.reload();
+                $(dom).parent().prev().text(result);
+            })
+        }
+
+    }
 
     function getTypes(type = 'big', id = 0) {
         $.get("./api/get_types.php", {
