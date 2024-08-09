@@ -26,7 +26,7 @@ function editType(id, dom) {
 
 }
 
-function getTypes(type = 'big', id = 0) {
+function getTypes(type = 'big', id = 0,selected=0) {
 	$.get("./api/get_types.php", {
 		type,
 		id,
@@ -35,9 +35,16 @@ function getTypes(type = 'big', id = 0) {
 		switch (type) {
 			case 'big':
 				$("#bigSelect").html(types)
+				if(selected>0){
+					$("#bigSelect").val(selected)
+					getTypes('mid',selected)
+				}
 				break;
 			case 'mid':
 				$("#midSelect").html(types)
+				if(selected>0){
+					$("#midSelect").val(selected)
+				}
 				break;
 		}
 	})
