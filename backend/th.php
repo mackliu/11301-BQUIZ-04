@@ -44,70 +44,13 @@
 
 
 <h2 class="ct">商品管理</h2>
-
+<div class="ct">
+    <button onclick="location.href='?do=add_goods'">新增商品</button>
+</div>
 
 
 
 
 <script>
     getTypes();
-
-    function editType(id, dom) {
-        let name = $(dom).parent().prev().text();
-        let result = prompt("請輸入要修改的分類名稱", name);
-        if (result != null) {
-            $.post('api/edit_type.php', {
-                id,
-                name: result
-            }, () => {
-                //location.reload();
-                $(dom).parent().prev().text(result);
-            })
-        }
-
-    }
-
-    function getTypes(type = 'big', id = 0) {
-        $.get("./api/get_types.php", {
-            type,
-            id,
-        }, (types) => {
-            switch (type) {
-                case 'big':
-                    $("#bigSelect").html(types)
-                    break;
-                case 'mid':
-                    $("#midSelect").html(types)
-                    break;
-            }
-        })
-    }
-
-    function addType(type) {
-        let big, mid;
-        switch (type) {
-            case 'big':
-                big = $("#big").val();
-                $.post('api/add_type.php', {
-                    type,
-                    big
-                }, () => {
-                    location.reload();
-                    //getTypes('big', 0);
-                    //$("#big").val('');
-                })
-                break;
-            case 'mid':
-                big = $("#bigSelect").val();
-                mid = $("#mid").val();
-                $.post('api/add_type.php', {
-                    type,
-                    big,
-                    mid
-                }, () => {
-                    location.reload();
-                })
-                break;
-        }
-    }
 </script>
