@@ -54,9 +54,9 @@ $row = $Goods->find($_GET['id']);
 </div>
 
 <script>
-    getTypes('big',0,<?= $row['big']; ?>);
-    getTypes('mid', <?= $row['big']; ?>, <?= $row['mid']; ?>);
-
+    //getTypes的第三個參數為陣列,分別是大分類和中分類的值
+    getTypes('big',0,[<?= $row['big']; ?>,<?= $row['mid']; ?>]);
+    
     $("#bigSelect").on("change", function() {
         getTypes('mid', $(this).val());
     })
