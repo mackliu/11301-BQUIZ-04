@@ -22,3 +22,24 @@ if ($type == 0) {
 ?>
 
 <h2><?= $nav; ?></h2>
+
+<?php
+foreach ($rows as $row) {
+?>
+    <!-- .item>.img+.info>div*4 -->
+    <div class="item">
+        <div class="img"><img src="./images/<?= $row['img']; ?>" alt=""></div>
+        <div class="info">
+            <div><?= $row['name']; ?></div>
+            <div>
+                價錢:<?= $row['price']; ?>
+                <img src="./icon/0402.jpg" alt="">
+            </div>
+            <div>規格:<?= $row['spec']; ?></div>
+            <div>簡介:<?= mb_substr($row['name'], 0, 30); ?>...</div>
+        </div>
+    </div>
+
+<?php
+}
+?>
