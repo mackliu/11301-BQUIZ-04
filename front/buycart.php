@@ -32,7 +32,7 @@ if (!empty($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $id => $qt) {
             $goods = $Goods->find($id);
         ?>
-            <tr class="pp ct">
+            <tr class="pp ct" id>
                 <td><?= $goods['no']; ?></td>
                 <td><?= $goods['name']; ?></td>
                 <td><?= $qt; ?></td>
@@ -40,7 +40,7 @@ if (!empty($_SESSION['cart'])) {
                 <td><?= $goods['price']; ?></td>
                 <td><?= $goods['price'] * $qt; ?></td>
                 <td style='cursor: pointer;'>
-                    <img src="./icon/0415.jpg" onclick="delCart(<?= $goods['id']; ?>)">
+                    <img src="./icon/0415.jpg" onclick="delCart(<?= $goods['id']; ?>,$(this).parents('tr'))">
                 </td>
             </tr>
         <?php
@@ -59,11 +59,14 @@ if (!empty($_SESSION['cart'])) {
 
 ?>
 <script>
-    function delCart(id) {
+    function delCart(id, dom) {
+
         $.get("./api/del_cart.php", {
             id
         }, function() {
-            location.href = '?do=buycart';
+            $(dom).fadeOut(3000, function() {
+                $(this).remove();
+            })
         })
     }
 </script>
