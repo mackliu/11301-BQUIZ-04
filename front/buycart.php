@@ -39,8 +39,8 @@ if (!empty($_SESSION['cart'])) {
                 <td><?= $goods['stock']; ?></td>
                 <td><?= $goods['price']; ?></td>
                 <td><?= $goods['price'] * $qt; ?></td>
-                <td>
-                    <img src="./icon/0415.jpg" alt="">
+                <td style='cursor: pointer;'>
+                    <img src="./icon/0415.jpg" onclick="location.href=' ./api/del_cart.php?id=<?= $goods['id']; ?>'">
                 </td>
             </tr>
         <?php
@@ -48,8 +48,8 @@ if (!empty($_SESSION['cart'])) {
         ?>
     </table>
     <div class="ct">
-        <img src="./icon/0411.jpg" alt="">
-        <img src="./icon/0412.jpg" alt="">
+        <img src="./icon/0411.jpg" alt="" onclick="location.href='index.php'">
+        <img src="./icon/0412.jpg" alt="" onclick="location.href='?do=checkout'">
     </div>
 <?php
 
