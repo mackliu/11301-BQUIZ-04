@@ -40,7 +40,7 @@ if (!empty($_SESSION['cart'])) {
                 <td><?= $goods['price']; ?></td>
                 <td><?= $goods['price'] * $qt; ?></td>
                 <td style='cursor: pointer;'>
-                    <img src="./icon/0415.jpg" onclick="location.href=' ./api/del_cart.php?id=<?= $goods['id']; ?>'">
+                    <img src="./icon/0415.jpg" onclick="delCart(<?= $goods['id']; ?>)">
                 </td>
             </tr>
         <?php
@@ -58,3 +58,12 @@ if (!empty($_SESSION['cart'])) {
 }
 
 ?>
+<script>
+    function delCart(id) {
+        $.get("./api/del_cart.php", {
+            id
+        }, function() {
+            location.href = '?do=buycart';
+        })
+    }
+</script>
