@@ -55,7 +55,16 @@ $row = $Goods->find($_GET['id']);
     <div class="qt tt ct">
         購買數量:
         <input type="number" name="qt" id="qt" value='1'>
-        <img src="./icon/0402.jpg" alt="">
+        <a href="javascript:buy(<?= $row['id']; ?>)">
+            <img src="./icon/0402.jpg" alt="">
+        </a>
     </div>
 </div>
 <div class="ct"><button onclick="location.href='index.php'">返回</button></div>
+
+<script>
+    function buy(id) {
+        let qt = $('#qt').val();
+        location.href = `?do=buycart&id=${id}&qt=${qt}`;
+    }
+</script>
