@@ -17,6 +17,10 @@ include_once "./api/base.php";
 <body>
     <iframe name="back" style="display:none;"></iframe>
     <style>
+        #cart {
+            position: relative;
+        }
+
         .round {
             display: inline-flex;
             background: orange;
@@ -27,6 +31,56 @@ include_once "./api/base.php";
             font-size: 14px;
             justify-content: center;
             align-items: center;
+        }
+
+        .cart-info {
+
+            position: absolute;
+            display: none;
+            padding-top: 30px;
+
+        }
+
+        .cart-info::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 80px;
+            width: 30px;
+            height: 30px;
+            z-index: -1;
+            border: 1px solid #999;
+            transform: rotate(45deg);
+            background: white;
+
+        }
+
+        .cart-body {
+            width: 200px;
+            height: 300px;
+            overflow: auto;
+            border: 1px solid #999;
+            padding: 5px;
+
+            background: white;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 2px 0;
+        }
+
+        .goods-total {
+            font-size: 24px;
+            font-weight: bolder;
+            text-align: right;
+            padding: 5px;
+            color: red;
+            position: absolute;
+            bottom: 0;
+            width: 90%;
+
         }
     </style>
     <div id="main">
@@ -65,7 +119,7 @@ include_once "./api/base.php";
                 }
                 ?>
             </div>
-            <marquee>
+            <marquee style="position:relative;z-index:-5">
                 年終特賣會開跑了 &nbsp; 情人節特惠活動
             </marquee>
         </div>
@@ -111,7 +165,49 @@ include_once "./api/base.php";
         <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
             <?= $Bottom->find(1)['bottom']; ?></div>
     </div>
-
+    <div class="cart-info">
+        <div class="cart-body">
+            <div class="goods-list"></div>
+            <div class="goods-total"></div>
+        </div>
+    </div>
 </body>
 
 </html>
+<script>
+    $("#cart").hover(
+        function() {
+            let pos = $("#cart").offset();
+            $(".cart-info").css({
+                top: pos.top + 10,
+                left: pos.left - 90
+            });
+            $.get("api/get_cart.php", function(cart) {
+                //console.log(cart);
+                let data = JSON.parse(cart);
+                let list = '';
+                data.list.forEach(goods => {
+                    list += `<div class='list-item'>
+                                <div>${goods.name}</div>
+                                <div>${goods.qt}</div>
+                                <div>${goods.sum}</div>
+                                </div>`;
+                });
+                $(".goods-list").html(list);
+                $(".goods-total").html(data.total);
+                $(".cart-info").toggle();
+            })
+        },
+        function() {
+            $(".cart-info").toggle();
+        })
+
+    $(".cart-info").hover(
+        function() {
+            $(".cart-info").show();
+        },
+        function() {
+            $(".cart-info").hide();
+        }
+    )
+</script>
