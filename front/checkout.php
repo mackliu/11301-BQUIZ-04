@@ -64,7 +64,8 @@ $mem = $Mem->find(['acc' => $_SESSION['Mem']]);
             'name': $('#name').val(),
             'email': $('#email').val(),
             'addr': $('#addr').val(),
-            'tel': $('#tel').val()
+            'tel': $('#tel').val(),
+            'total': <?= $total; ?>,
         }
         $.post('./api/checkout.php', data, function(res) {
             if (res == '1') {
