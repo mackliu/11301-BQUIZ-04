@@ -1,9 +1,5 @@
 <?php
 
-if (isset($_GET['id']) && isset($_GET['qt'])) {
-    $_SESSION['cart'][$_GET['id']] = $_GET['qt'];
-}
-
 if (!isset($_SESSION['Mem'])) {
     to("?do=login");
     exit();

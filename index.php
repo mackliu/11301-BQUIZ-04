@@ -16,6 +16,19 @@ include_once "./api/base.php";
 
 <body>
     <iframe name="back" style="display:none;"></iframe>
+    <style>
+        .round {
+            display: inline-flex;
+            background: orange;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
     <div id="main">
         <div id="top">
             <a href="?">
@@ -25,7 +38,17 @@ include_once "./api/base.php";
                 <a href="?">回首頁</a> |
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
-                <a href="?do=buycart">購物車</a> |
+                <a href="?do=buycart">購物車
+                    <span id='cart'>
+                        <?php
+                        if (isset($_SESSION['cart'])) {
+                            echo "<div class='round'>";
+                            echo count($_SESSION['cart']);
+                            echo "</div>";
+                        }
+                        ?>
+                    </span>
+                </a> |
                 <?php
                 if (isset($_SESSION['Mem'])) {
                     echo "<a href='./api/logout.php?user=mem'>登出</a> |";
