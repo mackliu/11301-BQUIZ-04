@@ -4,9 +4,21 @@ function lof(x)
 	location.href=x
 }
 
-function del(table,id){
+function del(table,id,fn=null){
 	$.post("./api/del.php",{table,id},function(){
-		location.reload()
+		if(fn!=null){
+			switch(fn){
+				case 'typelist':
+					getTypeList();
+					break;
+				case 'goodslist':
+					getGoods();
+					break;
+				}
+			
+			
+		}
+		//location.reload()
 	}	)
 }
 
