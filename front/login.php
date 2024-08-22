@@ -22,15 +22,25 @@
             $b = rand(10, 99);
             $_SESSION['ans'] = $a + $b;
             echo $a . " + " . $b . " = "; */
-            $_SESSION['ans'] = code(4);
+            //$_SESSION['ans'] = code(4);
             ?>
-            <img src="<?= captcha($_SESSION['ans']); ?>" alt="" onclick="location.reload()">
+            <img src="" id='catpcha' alt="" onclick="loadCatpcha()">
             <input type="text" name="ans" id="ans">
         </td>
     </tr>
 </table>
 <div class="ct"><button onclick="login()">確認</button></div>
 <script>
+    loadCatpcha();
+
+    function loadCatpcha() {
+        $.get("./api/get_catpcha.php", (img) => {
+
+            $("#catpcha").attr("src", img);
+
+        })
+    }
+
     function login() {
         $.get("./api/chk_ans.php", {
             ans: $("#ans").val()

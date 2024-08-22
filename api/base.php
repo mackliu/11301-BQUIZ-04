@@ -209,7 +209,7 @@ function captcha($str)
     //建立兩個變數用來計算所有字元的總寬度及最大高度
     $dst_w = 0;
     $dst_h = 0;
-
+    //echo realpath('./fonts/arial.ttf');
     //使用迴圈來逐一分析每個字元的圖形資訊
     for ($i = 0; $i < mb_strlen($gstr); $i++) {
 
