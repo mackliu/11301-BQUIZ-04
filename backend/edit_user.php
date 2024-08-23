@@ -13,11 +13,19 @@ $row = $Mem->find($_GET['id']);
             <td class="tt ct">密碼</td>
             <td class="pp"><?= $row['pw']; ?></td>
         </tr>
-        <!--         <tr>
+        <tr>
             <td class="tt ct">累積交易額</td>
-            <td class="pp"><?php //echo $Order->sum(['acc' => $row['acc']]); 
-                            ?></td>
-        </tr> -->
+            <td class="pp">
+                <?php
+                if ($Order->sum('total', ['acc' => $row['acc']])) {
+                    echo $Order->sum('total', ['acc' => $row['acc']]);
+                } else {
+                    echo 0;
+                }
+
+                ?>
+            </td>
+        </tr>
         <tr>
             <td class="tt ct">姓名</td>
             <td class="pp">
